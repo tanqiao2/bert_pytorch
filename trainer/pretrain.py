@@ -137,7 +137,7 @@ class BERTTrainer:
                 data_iter.write(str(post_fix))
                 logging.info('Epoch [{}], Step [{}], next_loss[{}], mask_loss[{}], avg_loss: {:.4f}, next_avg_acc: {}, loss{}'
                      .format(epoch, i, next_loss.item(),mask_loss.item(), avg_loss / (i + 1),total_correct * 100.0 / total_element, loss.item()))
-            if i and i % 100 == 0:
+           
                 self.save(self.export_path)
 
         print("EP%d_%s, avg_loss=" % (epoch, str_code), avg_loss / len(data_iter), "total_acc=",
