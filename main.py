@@ -25,7 +25,7 @@ def train():
     parser.add_argument("-b", "--batch_size", type=int, default=128, help="number of batch_size")
     parser.add_argument("-e", "--epochs", type=int, default=3, help="number of epochs")
     parser.add_argument("-w", "--num_workers", type=int, default=5, help="dataloader worker size")
-    parser.add_argument("-m", "--model", type=str, default=None, help="initial model")
+   
 
     parser.add_argument("--with_cuda", type=bool, default=True, help="training with CUDA: true, or false")
     parser.add_argument("--log_freq", type=int, default=10, help="printing loss every n iter: setting n")
@@ -54,13 +54,7 @@ def train():
         if test_dataset is not None else None
 
     print("Building BERT model")
-   
-    
-    if args.model != None:
-        bert = torch.load(args.model)
-        print("load trained model bert-----")
-    else:
-        bert = BERT(30522, hidden=args.hidden, n_layers=args.layers, attn_heads=args.attn_heads)
+    bert = BERT(30522, hidden=args.hidden, n_layers=args.layers, attn_heads=args.attn_heads)
     
     print("Creating BERT Trainer")
     trainer = BERTTrainer(bert, 30522, train_dataloader=train_data_loader, test_dataloader=test_data_loader,
