@@ -4,7 +4,7 @@ import torch
 import random
 import numpy as np
 from transformers import BertTokenizer
-
+import os
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
 
@@ -20,10 +20,10 @@ class BERTDataset(Dataset):
         self.encoding = encoding
         self.lines = []
         
-        
-        for i in range(16):
-            file_name = corpus_path + str(i) + ".txt"
-            with open(file_name, "r", encoding=encoding) as f:                
+        file_names = os.listdir(corpus_path)
+        for file in file_names:
+            
+            with open(file, "r", encoding=encoding) as f:                
                 self.lines.extend([line[:-1].split("\t")
                                 for line in tqdm.tqdm(f, desc="Loading Dataset", total=corpus_lines) if line.find("\t") != -1])
                 self.corpus_lines = len(self.lines)
