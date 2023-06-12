@@ -3,7 +3,7 @@ import tqdm
 
 import nltk
 
-#nltk.download('punkt')
+nltk.download('punkt')
 
 a = load_dataset("wikipedia", "20220301.en")
 
